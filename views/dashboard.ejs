@@ -1,0 +1,359 @@
+<%- include('layouts/header.ejs') %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Exo+2&family=Poppins:wght@300&display=swap');
+    .row{
+        height: 80vh;
+        width: 85vw;
+        margin: auto;
+        /* border: 2px solid black; */
+        display: flex;
+        border-radius: 20px;
+        margin-top: 50px;
+        box-shadow:#9999d7 10px 10px 20px 20px;
+    }
+    .friends{
+        height: 80vh;
+        width: 20vw;
+        background-color: rgb(85, 12, 133);
+        border-right: 1px solid black;
+        border-bottom-left-radius: 20px;
+        border-top-left-radius: 20px;
+        overflow-y: auto;
+    }
+    .listuseritems{
+        list-style: none;
+        height: 45px;
+        width: 20vw;
+        font-size: 1rem;
+        background-color: rgb(85, 12, 133);
+        color: white;
+        padding-top: 5px;
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        cursor: pointer;
+        text-transform: capitalize;
+        font-family: 'Exo 2', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    }
+    .listuseritems:hover{
+        background-color:rgb(50, 5, 79);
+        height: 48px;
+        font-size: 1.2rem;
+    }
+    .profilepic{
+        border-radius: 50%;
+        margin-right: 8px;
+        padding: 7px;
+        margin-bottom: 4px;
+    }
+    .onstatus{
+        font-size: 0.5rem;
+        margin-left: 5px;
+        color:green;
+    }
+    .offstatus{
+        font-size: 0.5rem;
+        margin-left: 5px;
+        color: rgb(149, 23, 23);
+    }
+    .chatcontainer{
+        width: 65vw;
+        height: 65.7vh;
+        background-color:#ffffff;
+        overflow-y: auto;
+    }
+    #chat-form{
+        width: 65vw;
+    }
+    #message{
+        width: 60vw;
+        height: 36px;
+        background-color: #ededf9;
+        border: none;
+        color: black;
+    }
+    .sndbtn{
+        height: 37px;
+        width: 4.6vw;
+        background-color: #ededf9;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+        color: rgb(50, 5, 79);
+        cursor: pointer;
+        border: none;
+    }
+    .sender{
+        width: 40%;
+        height: 40px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        background-color:#ededf9;
+        margin: 10px 10px;
+        padding-left: 4px;
+        float: right;
+        clear: both;
+
+    }
+    .receiver{
+        width: 40%;
+        height: 40px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        background-color:  #9999d7;
+        margin: 10px 10px;
+        padding-left: 4px;
+        float: left;
+        clear: both;
+    }
+    .nav{
+        height: 60px;
+        font-size: 1.2rem;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    #logo{
+        margin: 0 16px 0 16px;
+        font-size: 1.5rem;
+        height: 50px;
+        width: 120px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        color:rgb(50, 5, 79) ;
+        
+    }
+    #logo:hover{
+        height: 53px;
+        width: 123px;
+        background-color:rgb(50, 5, 79);
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 1.2rem;
+
+    }
+    .userhead{
+        height: 8.8vh;
+        width: 65vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        text-transform: capitalize;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+    }
+    .userhead1{
+        height: 8.8vh;
+        width: 65vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        text-transform: capitalize;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+    }
+    #userheadpic{
+        border-radius: 50%;
+        margin: 0 10px 0 10px;
+    }
+    .head{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        /* width: 25vw; */
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-weight: bold;
+    }
+    .head:hover{
+        font-size: 1.3rem;
+        background-color: #ededf9;
+    }
+    .fa-magnifying-glass{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+    .fa-solid:hover{
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+</style>
+
+<div class="row">
+    <div class="friends">
+        <div class="nav">
+            <i class="fa-solid fa-angle-left"></i>
+            <div class="logo"><p id="logo">VITS-Chat</p></div>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <ul class="listuser">
+            <%
+               if(users.length>0){
+                for(let i=0;i < users.length;i++){
+                    %>
+                    <li class="listuseritems" data-id="<%= users[i]['_id'] %>">
+                        <img src="<%= 'http://127.0.0.1:3000/'+users[i]['image'] %>" alt="" width="40px" height="40px" class="profilepic">
+                        <%= users[i]['name'] %>
+
+                        <%
+                            if(users[i]['is_online']==1){
+                                %>
+                                    <sup class="onstatus" id="<%= users[i]['_id'] %> -status"><i class="fa-solid fa-circle"></i></sup>
+                                <%
+
+                            }
+                            else{
+                                %>
+                                    <sup class="offstatus" id="<%= users[i]['_id'] %>-status"><i class="fa-solid fa-circle"></i></sup>
+                                <%
+
+                            }
+                        %>
+
+                    </li>
+                    
+                    <%
+                }
+               } 
+            %>
+        </ul>
+
+    </div>
+    <div class="chatsection">
+        <div class="userhead">
+            <div class="head">
+                <h2>Welcome to VITS Chat </h2><img src="<%='http://127.0.0.1:3000/'+ user.image %>" alt="" width="40px" height="40px" id="userheadpic"><h3 class="username"> <%= user.name %></h3>
+            </div>
+        </div>
+        <div class="userhead1">
+            <div class="head">
+                <h2>Have a good time ,  </h2><h2 class="username"> <%= user.name %></h2>
+            </div>
+        </div>
+        <div class="chatcontainer">
+            
+        
+        </div>
+        <form action="" id="chat-form">
+            <input type="text" placeholder="Enter your message" id="message"><button class="sndbtn"><i class="fa-regular fa-paper-plane"></i></button>
+        
+        </form>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    // const User=require('../models/userModel');
+    var sender_id= '<%= user._id %>';
+    var receiver_id;
+    var socket=io('/user-namespace',{
+        auth:{
+            token:'<%= user._id %>'
+        }
+    });
+// const User=require("../models/userModel");
+    $(document).ready(function(){
+        $('.chatcontainer').hide();
+        $('#chat-form').hide();
+        $('.userhead').show();
+        $('.userhead1').hide();
+        $('.listuseritems').click(function(){
+            var userId=$(this).attr('data-id');
+            receiver_id=userId;
+            $('.chatcontainer').show();
+            $('#chat-form').show();
+            $('.userhead').hide();
+            $('.userhead1').show();
+            
+            socket.emit('existsChat',{sender_id:sender_id,receiver_id:receiver_id});
+        });
+    });
+
+    // update user online status
+    socket.on('getOnlineUser',function(data){
+        $('#'+data.user_id+'-status').removeClass('offstatus');
+        $('#'+data.user_id+'-status').addClass('onstatus');
+    })
+    //update user offline status
+    socket.on('getOfflineUser',function(data){
+        $('#'+data.user_id+'-status').removeClass('onstatus');
+        $('#'+data.user_id+'-status').addClass('offstatus');
+    });
+
+    //chat save of user
+    $('#chat-form').submit(function(event){
+        event.preventDefault();
+        var message=$('#message').val();
+
+        $.ajax({
+            url:'/save-chat',
+            type:'POST',
+            data:{sender_id:sender_id,receiver_id:receiver_id,message:message},
+            success:function(response){
+                if(response.success){
+                    $('#message').val('');
+                    let chat=response.data.message;
+                    let html=`
+                    <div class="sender">`+chat+`</div>`;
+                    $('.chatcontainer').append(html);
+                    socket.emit('newChat',response.data);
+                    scrollChat();
+                }
+                else{
+                    alert(data.msg);
+                }
+            }
+        });
+
+    });
+
+    socket.on('loadNewChat',function(data){
+        if(sender_id==data.receiver_id && receiver_id==data.sender_id){
+            let html=`<div class="receiver">`+data.message+`</div>`;
+            $('.chatcontainer').append(html);
+
+        }
+        scrollChat();
+        
+    });
+
+    //load old chats
+    socket.on('loadChats',function(data){
+        $('.chatcontainer').html('');
+
+        var chats=data.chats;
+        let html='';
+        for(let x=0; x < chats.length;x++){
+            let addClass='';
+            if(chats[x]['sender_id']==sender_id){
+                addClass='sender';
+            }
+            else{
+                addClass='receiver';
+            }
+            html = html +`
+            <div class='`+addClass+`'>`+chats[x]['message']+`
+                </div>`;
+        }
+        $('.chatcontainer').append(html);
+
+        scrollChat();
+    });
+
+    function scrollChat(){
+        $('.chatcontainer').animate({
+            scrollTop:$('.chatcontainer').offset().top + $('.chatcontainer')[0].scrollHeight
+        },0);
+    }
+</script>
+<%- include('layouts/footer.ejs') %>
